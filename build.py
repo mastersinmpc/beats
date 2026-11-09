@@ -278,7 +278,7 @@ SCRIPT = r"""<script>
         clipPlayer.title=title;
         clipDialog.classList.toggle('landscape',trigger.dataset.videoFormat==='landscape');
         clipDialog.showModal();
-        clipPlayer.src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(trigger.dataset.youtube)+'?playsinline=1&autoplay=1';
+        clipPlayer.src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(trigger.dataset.youtube)+'?playsinline=1&autoplay=1'+(trigger.dataset.videoStart ? '&start='+encodeURIComponent(trigger.dataset.videoStart) : '');
       });
     });
     clipDialog.addEventListener('close',function(){
@@ -385,8 +385,13 @@ def build_index(arts):
     W = json.loads((ART / "work.json").read_text())
     md = W["microdoc"]
     credits = "<br>".join(f"{esc(k)} <span>{esc(v)}</span>" for k, v in md["credits"])
-    videos = "\n".join(f"""
-        <li><a href="https://www.youtube.com/watch?v={esc(v['yt'])}" data-youtube="{esc(v['yt'])}" data-video-title="{esc(v['title'])}" data-video-format="landscape" aria-haspopup="dialog" aria-controls="clip-dialog"><img class="th" src="https://img.youtube.com/vi/{v['yt']}/hqdefault.jpg" alt="" loading="lazy"><span class="t">{esc(v['title'])}</span><span class="f">{esc(v['for'])}, {v['year']}</span></a></li>""" for v in W["videos"])
+    def video_card(v):
+        start = int(v.get("start", 0))
+        timestamp = f"&amp;t={start}s" if start else ""
+        start_attr = f' data-video-start="{start}"' if start else ""
+        return f"""
+        <li><a href="https://www.youtube.com/watch?v={esc(v['yt'])}{timestamp}"{start_attr} data-youtube="{esc(v['yt'])}" data-video-title="{esc(v['title'])}" data-video-format="landscape" aria-haspopup="dialog" aria-controls="clip-dialog"><img class="th" src="https://img.youtube.com/vi/{v['yt']}/hqdefault.jpg" alt="" loading="lazy"><span class="t">{esc(v['title'])}</span><span class="f">{esc(v['for'])}, {v['year']}</span></a></li>"""
+    videos = "\n".join(video_card(v) for v in W["videos"])
     def ev(e):
         strip = ('<div class="strip">' + "".join(f'<img src="{esc(u)}" alt="" loading="lazy">' for u in e["photos"]) + '</div>') if e.get("photos") else ""
         more = f'<a class="more" href="{esc(e["link"])}">{esc(e["linktext"])}</a>' if e.get("link") else ""
