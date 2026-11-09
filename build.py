@@ -110,7 +110,7 @@ img{max-width:100%;height:auto;display:block}
   line-height:1.06;
   letter-spacing:-.045em;
   font-weight:400;
-  margin:0 0 1.6rem;
+  margin:0 0 clamp(.3rem,1vw,.65rem);
   white-space:nowrap;
 }
 .hero p.lead{font-size:clamp(1.2rem,1.8vw,1.5rem);line-height:1.45;color:var(--ink-2);max-width:40rem;margin:0 0 1.8rem}
