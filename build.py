@@ -643,6 +643,7 @@ def build_index(arts):
     <div class="side"><span class="marg">§7 About</span>
     <h2>I am a failed founder and a failed filmmaker, and blending the two became my job.</h2></div>
     <div class="body">
+      <p>Beats is part of Itihasa Collective, an incubator for storytellers working in film and advertising.</p>
       <p>I live in two worlds. One is frontier AI, which I see every week through the fund. The other is culture: cinema, the internet, my own family. Beats is about the gap between them.</p>
       <p>Where AI is going is knowable if you pay attention. Where people are going is the mystery, and that is what I chase.</p>
       <p>I write in the first person and I am not neutral. I work in venture and I am betting my own time on this.</p>
