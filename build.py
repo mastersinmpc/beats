@@ -118,8 +118,9 @@ img{max-width:100%;height:auto;display:block}
 .worked-with h2{font:500 .65rem var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);margin:0;white-space:nowrap}
 .worked-with ul{list-style:none;display:flex;align-items:center;flex-wrap:wrap;gap:.75rem clamp(1.15rem,3vw,2.4rem);padding:0;margin:0}
 .worked-with img{height:.93rem;width:auto;max-width:6rem;object-fit:contain;filter:brightness(0);opacity:.44}
+.worked-with img.worked-pramaana{height:1.15rem;max-width:7rem}
 html[data-theme="dark"] .worked-with img{filter:brightness(0) invert(1)}
-@media(max-width:40rem){.worked-with{display:block}.worked-with h2{margin-bottom:.65rem}.worked-with img{height:.82rem;max-width:5.25rem}}
+@media(max-width:40rem){.worked-with{display:block}.worked-with h2{margin-bottom:.65rem}.worked-with img{height:.82rem;max-width:5.25rem}.worked-with img.worked-pramaana{height:1rem;max-width:6.25rem}}
 .hero .clip{display:flex;gap:.9rem;align-items:center;text-decoration:none;max-width:26rem}
 .hero button.clip{cursor:pointer;background:none;border:0;padding:0;color:inherit;font:inherit;text-align:left}
 .hero .clip-dialog{max-width:calc(100vw - 2rem);padding:.75rem;border:1px solid var(--rule);border-radius:5px;background:var(--paper);color:var(--ink)}
@@ -473,11 +474,12 @@ def build_index(arts):
 <section class="worked-with" aria-labelledby="worked-with-title">
   <h2 id="worked-with-title">Worked With</h2>
   <ul>
-    <li><img src="assets/worked-pramaana.svg" alt="Pramaana Labs"></li>
+    <li><img class="worked-pramaana" src="assets/worked-pramaana.svg" alt="Pramaana Labs"></li>
     <li><img src="assets/worked-accel.svg" alt="Accel"></li>
     <li><img src="assets/worked-boldcap.png" alt="BoldCap"></li>
     <li><img src="assets/worked-polygon.svg" alt="Polygon"></li>
     <li><img src="assets/worked-hyphenate.svg" alt="Hyphenate"></li>
+    <li><img src="assets/worked-unboxingblr.svg" alt="UnboxingBLR"></li>
   </ul>
 </section>
 {guide_html("")}
