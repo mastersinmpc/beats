@@ -114,6 +114,10 @@ img{max-width:100%;height:auto;display:block}
 }
 .hero p.lead{font-size:clamp(1.2rem,1.8vw,1.5rem);line-height:1.45;color:var(--ink-2);max-width:40rem;margin:0 0 1.8rem}
 .hero .clip{display:flex;gap:.9rem;align-items:center;text-decoration:none;max-width:26rem}
+.hero summary.clip{cursor:pointer;list-style:none}
+.hero summary.clip::-webkit-details-marker{display:none}
+.hero summary.clip:focus-visible{outline:2px solid var(--gold-ink);outline-offset:4px}
+.hero .clip-player{display:block;width:min(100%,18rem);aspect-ratio:9/16;border:0;border-radius:3px;margin-top:1rem;background:var(--paper-2)}
 .hero .clip .ph{flex:0 0 4.4rem;width:4.4rem;aspect-ratio:9/16;border-radius:3px;background:var(--paper-2);overflow:hidden;display:block}
 .hero .clip img{width:100%;height:100%;object-fit:cover;display:block}
 .hero .clip .tx{display:block;min-width:0}
@@ -395,10 +399,13 @@ def build_index(arts):
   <div class="hero-mid">
     <h1>Beats: Narratives <i>&amp;</i> Models</h1>
     <p class="lead">Storytelling in Residence to Frontier Research &amp; Startups</p>
-    <a class="clip" href="https://www.youtube.com/shorts/Mjz8Z2I0w_g">
+    <details>
+      <summary class="clip">
       <span class="ph"><img src="assets/horowitz.jpg" alt="Ben Horowitz" loading="lazy"></span>
       <span class="tx"><span class="marg quiet">Watch, one minute</span><span class="t">What's the story of your company?</span><span class="by">Ben Horowitz</span></span>
-    </a>
+      </summary>
+      <iframe class="clip-player" src="https://www.youtube-nocookie.com/embed/Mjz8Z2I0w_g?playsinline=1" title="What's the story of your company? — Ben Horowitz" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>
+    </details>
   </div>
 </section>
 {guide_html("")}
