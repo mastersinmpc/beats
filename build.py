@@ -119,6 +119,7 @@ img{max-width:100%;height:auto;display:block}
 .hero .clip-dialog::backdrop{background:rgba(16,12,18,.78)}
 .hero .clip-dialog form{display:flex;justify-content:flex-end;margin:0 0 .5rem}
 .hero .clip-dialog button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.hero .clip-dialog.landscape .clip-player{width:min(56rem,calc(100vw - 4rem),calc((100dvh - 6rem) * 16 / 9));aspect-ratio:16/9}
 .hero .clip-player{display:block;width:min(20rem,calc(100vw - 4rem),calc((100dvh - 6rem) * .5625));aspect-ratio:9/16;border:0;border-radius:3px;background:var(--paper-2)}
 .hero .clip .ph{flex:0 0 4.4rem;width:4.4rem;aspect-ratio:9/16;border-radius:3px;background:var(--paper-2);overflow:hidden;display:block}
 .hero .clip img{width:100%;height:100%;object-fit:cover;display:block}
@@ -265,12 +266,20 @@ footer a{text-decoration:none;color:var(--ink-2)}
 SCRIPT = r"""<script>
 (function(){
   var root=document.documentElement, btn=document.getElementById('theme');
-  var clipOpen=document.getElementById('clip-open'), clipDialog=document.getElementById('clip-dialog');
-  if(clipOpen && clipDialog){
+  var clipDialog=document.getElementById('clip-dialog');
+  if(clipDialog){
     var clipPlayer=clipDialog.querySelector('iframe');
-    clipOpen.addEventListener('click',function(){
-      clipDialog.showModal();
-      clipPlayer.src=clipPlayer.dataset.src;
+    document.querySelectorAll('[data-youtube]').forEach(function(trigger){
+      trigger.addEventListener('click',function(event){
+        if(event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        event.preventDefault();
+        var title=trigger.dataset.videoTitle;
+        clipDialog.setAttribute('aria-label',title);
+        clipPlayer.title=title;
+        clipDialog.classList.toggle('landscape',trigger.dataset.videoFormat==='landscape');
+        clipDialog.showModal();
+        clipPlayer.src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(trigger.dataset.youtube)+'?playsinline=1&autoplay=1';
+      });
     });
     clipDialog.addEventListener('close',function(){
       clipPlayer.removeAttribute('src');
@@ -377,7 +386,7 @@ def build_index(arts):
     md = W["microdoc"]
     credits = "<br>".join(f"{esc(k)} <span>{esc(v)}</span>" for k, v in md["credits"])
     videos = "\n".join(f"""
-        <li><a href="https://www.youtube.com/watch?v={v['yt']}"><img class="th" src="https://img.youtube.com/vi/{v['yt']}/hqdefault.jpg" alt="" loading="lazy"><span class="t">{esc(v['title'])}</span><span class="f">{esc(v['for'])}, {v['year']}</span></a></li>""" for v in W["videos"])
+        <li><a href="https://www.youtube.com/watch?v={esc(v['yt'])}" data-youtube="{esc(v['yt'])}" data-video-title="{esc(v['title'])}" data-video-format="landscape" aria-haspopup="dialog" aria-controls="clip-dialog"><img class="th" src="https://img.youtube.com/vi/{v['yt']}/hqdefault.jpg" alt="" loading="lazy"><span class="t">{esc(v['title'])}</span><span class="f">{esc(v['for'])}, {v['year']}</span></a></li>""" for v in W["videos"])
     def ev(e):
         strip = ('<div class="strip">' + "".join(f'<img src="{esc(u)}" alt="" loading="lazy">' for u in e["photos"]) + '</div>') if e.get("photos") else ""
         more = f'<a class="more" href="{esc(e["link"])}">{esc(e["linktext"])}</a>' if e.get("link") else ""
@@ -412,13 +421,13 @@ def build_index(arts):
   <div class="hero-mid">
     <h1>Beats: Narratives <i>&amp;</i> Models</h1>
     <p class="lead">Storytelling in Residence to Frontier Research &amp; Startups</p>
-    <button class="clip" id="clip-open" type="button" aria-haspopup="dialog" aria-controls="clip-dialog">
+    <button class="clip" type="button" data-youtube="Mjz8Z2I0w_g" data-video-title="What's the story of your company? — Ben Horowitz" aria-haspopup="dialog" aria-controls="clip-dialog">
       <span class="ph"><img src="assets/horowitz.jpg" alt="" loading="lazy"></span>
       <span class="tx"><span class="marg quiet">Watch, one minute</span><span class="t">What's the story of your company?</span><span class="by">Ben Horowitz</span></span>
     </button>
     <dialog class="clip-dialog" id="clip-dialog" aria-label="What's the story of your company?">
       <form method="dialog"><button type="submit" autofocus>Close</button></form>
-      <iframe class="clip-player" data-src="https://www.youtube-nocookie.com/embed/Mjz8Z2I0w_g?playsinline=1&amp;autoplay=1" title="What's the story of your company? — Ben Horowitz" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      <iframe class="clip-player" title="What's the story of your company? — Ben Horowitz" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
     </dialog>
   </div>
 </section>
