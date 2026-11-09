@@ -390,7 +390,6 @@ def build_index(arts):
 <section class="hero">
   <div class="hero-top">
     <span class="marg quiet">Beats by Itihasa &middot; a storytelling research lab</span>
-    <span class="marg quiet">Bangalore &middot; San Francisco</span>
   </div>
   <div class="hero-mid">
     <h1>Beats: Narratives <i>&amp;</i> Models</h1>
