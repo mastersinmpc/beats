@@ -162,13 +162,14 @@ section.block>.grid{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem 
 .block .side .marg{display:block;margin-bottom:.9rem}
 @media(max-width:59.99rem){
   .block .side{
-    padding:1rem 1.05rem 1.1rem;
+    padding:.85rem .85rem .95rem;
     border-block:1px solid var(--rule);
     background:var(--paper-2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='44' height='26'%3E%3Ctext x='2' y='10' font-family='monospace' font-size='8' fill='%23927082' fill-opacity='.14'%3E%2B%20-%20%2B%3C/text%3E%3C/svg%3E");
   }
   .block .side .marg{margin-bottom:.5rem}
 }
 .block h2{font-size:clamp(1.6rem,2.6vw,2.2rem);line-height:1.15;letter-spacing:-.015em;font-weight:400;margin:0;text-wrap:balance;max-width:20ch}
+@media(max-width:59.99rem){.block .side h2{max-width:none;text-wrap:pretty}}
 .block .body{max-width:var(--measure)}
 .block .body p{margin:0 0 1.15rem}
 .block .body p:last-child{margin-bottom:0}
