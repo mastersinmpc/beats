@@ -80,12 +80,17 @@ img{max-width:100%;height:auto;display:block}
 .guide .steps a:hover{color:var(--ink)}
 .guide .steps a.on{color:var(--pencil)}
 .guide .steps a.on::before{content:"";position:absolute;left:.55rem;right:.55rem;bottom:-.05rem;height:1px;background:var(--pencil)}
-.guide .toggle{font-family:var(--mono);font-size:.74rem;color:var(--ink-3);background:none;border:1px solid var(--rule);border-radius:999px;padding:.3rem .7rem;cursor:pointer;white-space:nowrap}
+.guide .toggle{flex:none;margin-left:auto;font-family:var(--mono);font-size:.74rem;color:var(--ink-3);background:none;border:1px solid var(--rule);border-radius:999px;padding:.3rem .7rem;cursor:pointer;white-space:nowrap}
 .guide .toggle:hover{color:var(--ink);border-color:var(--ink-3)}
 .guide .bar{height:1px;background:var(--pencil);width:0;transition:width .15s linear;margin:0 calc(-1*var(--gutter))}
 .guide .here{font-family:var(--mono);font-size:.74rem;color:var(--ink-3);display:none}
 .guide .here{display:none}
-@media(max-width:60rem){.guide .row{gap:.6rem}.guide .steps{flex:1;min-width:0;-webkit-overflow-scrolling:touch;mask-image:linear-gradient(90deg,#000 85%,transparent)}}
+.guide .swipe-hint{display:none}
+@media(max-width:60rem){
+  .guide .row{gap:.6rem;height:2.85rem}
+  .guide .steps{flex:1;min-width:0;-webkit-overflow-scrolling:touch;scroll-padding-inline:.55rem}
+  .guide .swipe-hint{display:block;padding:0 .55rem .4rem;color:var(--ink-3);font:.68rem var(--mono);line-height:1.25}
+}
 @media (prefers-reduced-motion:reduce){.guide .bar{transition:none}}
 
 /* ---------- hero: one full fold, composed like a plate ---------- */
@@ -118,9 +123,9 @@ img{max-width:100%;height:auto;display:block}
 .worked-with h2{font:500 .65rem var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);margin:0;white-space:nowrap}
 .worked-with ul{list-style:none;display:flex;align-items:center;flex-wrap:wrap;gap:.75rem clamp(1.15rem,3vw,2.4rem);padding:0;margin:0}
 .worked-with img{height:.93rem;width:auto;max-width:6rem;object-fit:contain;filter:brightness(0);opacity:.44}
-.worked-with img.worked-pramaana{height:1.15rem;max-width:7rem}
+.worked-with img.worked-pramaana{height:1.3rem;max-width:8rem;opacity:.67}
 html[data-theme="dark"] .worked-with img{filter:brightness(0) invert(1)}
-@media(max-width:40rem){.worked-with{display:block}.worked-with h2{margin-bottom:.65rem}.worked-with img{height:.82rem;max-width:5.25rem}.worked-with img.worked-pramaana{height:1rem;max-width:6.25rem}}
+@media(max-width:40rem){.worked-with{display:block}.worked-with h2{margin-bottom:.65rem}.worked-with img{height:.82rem;max-width:5.25rem}.worked-with img.worked-pramaana{height:1.12rem;max-width:7rem}}
 .hero .clip{display:flex;gap:.9rem;align-items:center;text-decoration:none;max-width:26rem}
 .hero button.clip{cursor:pointer;background:none;border:0;padding:0;color:inherit;font:inherit;text-align:left}
 .hero .clip-dialog{max-width:calc(100vw - 2rem);padding:.75rem;border:1px solid var(--rule);border-radius:5px;background:var(--paper);color:var(--ink)}
@@ -385,6 +390,7 @@ GUIDE = """<header class="guide" id="guide">
     <span class="here" id="here"></span>
     <button class="toggle" id="theme" type="button" aria-label="Switch between light and dark">dark</button>
   </div>
+  <span class="swipe-hint">Swipe tabs &harr;</span>
   <div class="bar" id="bar"></div>
 </header>
 """
