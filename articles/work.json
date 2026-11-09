@@ -1,0 +1,30 @@
+{
+ "videos": [
+  {"yt":"30JiOvrEPrs","title":"Pramaana Launch Video","for":"Pramaana Labs","year":"2026"},
+  {"yt":"jUdLcx8RAsE","title":"Verification Summit film","for":"Pramaana Labs and BoldCap, San Francisco","year":"2026"},
+  {"yt":"ml5NdSa-ttE","title":"Maximor Launch Video","for":"Maximor, now Hyphenate","year":"2026"},
+  {"yt":"SreKMDJTYB0","title":"Maximor Funding Announcement","for":"Maximor, now Hyphenate","year":"2026"},
+  {"yt":"rRthgUznxCY","title":"Maximor Close Campaign Ad","for":"Maximor, now Hyphenate","year":"2026"},
+  {"yt":"JZFsrcEcTi4","title":"OpenAI Demo Party x BoldCap","for":"BoldCap","year":"2026"},
+  {"yt":"UAlVIoHCnZU","title":"Thumps Up","for":"BoldCap","year":"2026"}
+ ],
+ "microdoc": {"yt":"30JiOvrEPrs","title":"Promise of Pramaana","sub":"One Proof at a Time","length":"about 5 minutes","year":"2026","desc":"A micro documentary on the meeting of ancient mathematical wisdom and modern computational proof systems, following Pramaana Labs as they turn centuries of knowledge into verifiable frameworks.","credits":[["Written and directed by","Siddharth Ram"],["Co-director","Mohammed"],["Edited by","Daksh"],["Designed by","Anto"],["Camera","Balu"],["Produced by","Pramaana Labs"]]},
+ "events": [
+  {"title":"Verification Summit, inaugural edition","where":"San Francisco, June 2026","desc":"The first Verification Summit, anchored by Vinod Khosla. I built the storytelling around it, including the film made for the room, AI Stops Saying Sorry.","photos":[
+   "https://cirmvxdwmppjxyezjako.supabase.co/storage/v1/object/public/media/thumbnails/1781634941432-j0f2uk2dr6.png",
+   "https://cirmvxdwmppjxyezjako.supabase.co/storage/v1/object/public/media/thumbnails/1781634944574-4u40qk8eq93.png",
+   "https://cirmvxdwmppjxyezjako.supabase.co/storage/v1/object/public/media/thumbnails/1781634947918-eo76wrut1kd.png",
+   "https://cirmvxdwmppjxyezjako.supabase.co/storage/v1/object/public/media/thumbnails/1781634949940-2er45o581gx.png",
+   "https://cirmvxdwmppjxyezjako.supabase.co/storage/v1/object/public/media/thumbnails/1781634954028-xqoh81chwu.png",
+   "https://cirmvxdwmppjxyezjako.supabase.co/storage/v1/object/public/media/thumbnails/1781634957307-uqscz4z2s7k.png"],"link":"https://x.com/fv_summit/status/2062140090902847948","linktext":"Watch AI Stops Saying Sorry"},
+  {"title":"Follow The Frontier","where":"Bangalore, Fridays, November to December 2026","desc":"BoldCap's invite-only series that brings researchers and builders into one room to follow what is actually moving at the frontier.","photos":[]},
+  {"title":"OpenAI Demo Party x BoldCap","where":"Bangalore, 2026","desc":"A demo party for builders rather than a conference. The film from the night is in the videos above.","photos":[]}
+ ],
+ "websites": [
+  {"title":"Pramaana Labs","desc":"Website design and brand storytelling for an AI verification lab. The brand had to make formal proof feel like trust, not like mathematics.","img":"https://cirmvxdwmppjxyezjako.supabase.co/storage/v1/object/public/media/thumbnails/1781634688700-axqgccm7mlq.png","url":""},
+  {"title":"BoldCap","desc":"Brand identity, website and narrative strategy for the fund I work at. The thesis on the site is written the way the partners talk.","img":"https://cirmvxdwmppjxyezjako.supabase.co/storage/v1/object/public/media/thumbnails/1781634642566-6f2acegsa3k.png","url":"https://boldcap.com"}
+ ],
+ "shows": [
+  {"title":"Attention Is All You Need","desc":"A solo essay-film show about the gap between frontier AI and the culture it lands in. Episode one is the manifesto; episode two is on the future of fashion.","where":"YouTube, in production"}
+ ]
+}

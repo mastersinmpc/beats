@@ -1,0 +1,72 @@
+[
+ {
+  "id": "arXiv:2602.05125",
+  "title": "Rethinking Rubric Generation for LLM Judges and Reward Models",
+  "who": "Shen et al., Meta, Feb 2026",
+  "url": "https://arxiv.org/abs/2602.05125",
+  "note": "The paper that gave me RLNR. It splits vague criteria until they bite and fires the ones that reward the weaker draft. Every writers' room does this; now it is a training signal."
+ },
+ {
+  "id": "arXiv:2601.17226",
+  "title": "Retell, Reward, Repeat",
+  "who": "Liu, Muston, Srirag, Joshi, 2026",
+  "url": "https://arxiv.org/html/2601.17226",
+  "note": "The only paper so far that put a narratology book (Todorov) into the reward. Closest thing to my retelling test, and the first I will try to beat."
+ },
+ {
+  "id": "ICLR 2026",
+  "title": "StoryAlign: Evaluating and Training Reward Models for Story Generation",
+  "who": "Xia, Peng et al., Tsinghua",
+  "url": "https://www.alphaxiv.org/abs/2605.04831",
+  "note": "Finds that reward models prefer machine-written stories to human ones. That bias is the whole problem in one table."
+ },
+ {
+  "id": "EACL 2026",
+  "title": "LitBench",
+  "who": "Fein, Russo, Xiang et al., Stanford",
+  "url": "https://arxiv.org/abs/2507.00769",
+  "note": "The reference dataset. The best judge agrees with humans 73 percent of the time; the gap is where structure has to do the work."
+ },
+ {
+  "id": "CHI 2024",
+  "title": "Art or Artifice? The Torrance Test of Creative Writing",
+  "who": "Chakrabarty et al.",
+  "url": "https://arxiv.org/abs/2309.14556",
+  "note": "Fourteen tests written with expert writers. Model stories passed three to ten times fewer of them. Read it as a craftsperson, not as a benchmark."
+ },
+ {
+  "id": "arXiv:2606.04095",
+  "title": "POLARIS: Guiding Small Models to Write Long Stories",
+  "who": "2026",
+  "url": "https://arxiv.org/pdf/2606.04095",
+  "note": "A 9B model, four A100s, competitive long fiction. The budget that makes Beatcode possible on a residency's income."
+ },
+ {
+  "id": "ICML 2026",
+  "title": "Rubric Curriculum RL",
+  "who": "2026",
+  "url": "https://icml.cc/virtual/2026/poster/64634",
+  "note": "A moving rubric is harder to hack than a fixed one. Useful for anyone who has watched a writer learn to game the note."
+ },
+ {
+  "id": "AAAI 2026",
+  "title": "RLMR: Reinforcement Learning with Mixed Rewards",
+  "who": "2026",
+  "url": "https://arxiv.org/abs/2508.18642",
+  "note": "Half the reward is a judge, half is a verifier, and the mix moves per sample. The closest existing design to the one I want to build."
+ },
+ {
+  "id": "ICML 2026",
+  "title": "NCP-Bench: Narrative Commitment Preservation",
+  "who": "2026",
+  "url": "https://huggingface.co/papers/2608.08160",
+  "note": "Checks an interactive story turn by turn against a ledger of facts and commitments. A commitment ledger is a beat graph by another name."
+ },
+ {
+  "id": "arXiv:2605.27878",
+  "title": "Narrative Flattening",
+  "who": "Li, Zhu, Wu, Bao, Evans, Chicago",
+  "url": "https://www.alphaxiv.org/abs/2605.27878.md",
+  "note": "Measures how post-training compresses stories toward one mundane regime. The scientific version of what I called slop in Understanding Taste."
+ }
+]
