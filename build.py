@@ -120,6 +120,9 @@ img{max-width:100%;height:auto;display:block}
 .hero .clip-dialog form{display:flex;justify-content:flex-end;margin:0 0 .5rem}
 .hero .clip-dialog button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 .hero .clip-dialog.landscape .clip-player{width:min(56rem,calc(100vw - 4rem),calc((100dvh - 6rem) * 16 / 9));aspect-ratio:16/9}
+.hero .clip-dialog.social .clip-player{width:min(34rem,calc(100vw - 4rem));height:min(38rem,calc(100dvh - 8rem));aspect-ratio:auto}
+.hero .clip-dialog .clip-source{display:block;margin-top:.5rem;font-size:.85rem}
+.hero .clip-dialog .clip-source[hidden]{display:none}
 .hero .clip-player{display:block;width:min(20rem,calc(100vw - 4rem),calc((100dvh - 6rem) * .5625));aspect-ratio:9/16;border:0;border-radius:3px;background:var(--paper-2)}
 .hero .clip .ph{flex:0 0 4.4rem;width:4.4rem;aspect-ratio:9/16;border-radius:3px;background:var(--paper-2);overflow:hidden;display:block}
 .hero .clip img{width:100%;height:100%;object-fit:cover;display:block}
@@ -269,7 +272,8 @@ SCRIPT = r"""<script>
   var clipDialog=document.getElementById('clip-dialog');
   if(clipDialog){
     var clipPlayer=clipDialog.querySelector('iframe');
-    document.querySelectorAll('[data-youtube]').forEach(function(trigger){
+    var clipSource=clipDialog.querySelector('.clip-source');
+    document.querySelectorAll('[data-youtube], [data-x-post]').forEach(function(trigger){
       trigger.addEventListener('click',function(event){
         if(event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
         event.preventDefault();
@@ -277,8 +281,14 @@ SCRIPT = r"""<script>
         clipDialog.setAttribute('aria-label',title);
         clipPlayer.title=title;
         clipDialog.classList.toggle('landscape',trigger.dataset.videoFormat==='landscape');
+        var post=trigger.dataset.xPost;
+        clipDialog.classList.toggle('social',Boolean(post));
+        clipSource.hidden=!post;
+        if(post) clipSource.href=trigger.href;
         clipDialog.showModal();
-        clipPlayer.src='https://www.youtube-nocookie.com/embed/'+encodeURIComponent(trigger.dataset.youtube)+'?playsinline=1&autoplay=1'+(trigger.dataset.videoStart ? '&start='+encodeURIComponent(trigger.dataset.videoStart) : '');
+        clipPlayer.src=post
+          ? 'https://platform.twitter.com/embed/Tweet.html?dnt=true&id='+encodeURIComponent(post)
+          : 'https://www.youtube-nocookie.com/embed/'+encodeURIComponent(trigger.dataset.youtube)+'?playsinline=1&autoplay=1'+(trigger.dataset.videoStart ? '&start='+encodeURIComponent(trigger.dataset.videoStart) : '');
       });
     });
     clipDialog.addEventListener('close',function(){
@@ -389,8 +399,14 @@ def build_index(arts):
         start = int(v.get("start", 0))
         timestamp = f"&amp;t={start}s" if start else ""
         start_attr = f' data-video-start="{start}"' if start else ""
+        if v.get("x_post"):
+            post_url = v["x_post"]
+            post_id = post_url.rsplit("/", 1)[-1]
+            source = f'href="{esc(post_url)}" data-x-post="{esc(post_id)}"'
+        else:
+            source = f'href="https://www.youtube.com/watch?v={esc(v["yt"])}{timestamp}"{start_attr} data-youtube="{esc(v["yt"])}"'
         return f"""
-        <li><a href="https://www.youtube.com/watch?v={esc(v['yt'])}{timestamp}"{start_attr} data-youtube="{esc(v['yt'])}" data-video-title="{esc(v['title'])}" data-video-format="landscape" aria-haspopup="dialog" aria-controls="clip-dialog"><img class="th" src="https://img.youtube.com/vi/{v['yt']}/hqdefault.jpg" alt="" loading="lazy"><span class="t">{esc(v['title'])}</span><span class="f">{esc(v['for'])}, {v['year']}</span></a></li>"""
+        <li><a {source} data-video-title="{esc(v['title'])}" data-video-format="landscape" aria-haspopup="dialog" aria-controls="clip-dialog"><img class="th" src="https://img.youtube.com/vi/{v['yt']}/hqdefault.jpg" alt="" loading="lazy"><span class="t">{esc(v['title'])}</span><span class="f">{esc(v['for'])}, {v['year']}</span></a></li>"""
     videos = "\n".join(video_card(v) for v in W["videos"])
     def ev(e):
         strip = ('<div class="strip">' + "".join(f'<img src="{esc(u)}" alt="" loading="lazy">' for u in e["photos"]) + '</div>') if e.get("photos") else ""
@@ -433,6 +449,7 @@ def build_index(arts):
     <dialog class="clip-dialog" id="clip-dialog" aria-label="What's the story of your company?">
       <form method="dialog"><button type="submit" autofocus>Close</button></form>
       <iframe class="clip-player" title="What's the story of your company? — Ben Horowitz" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+      <a class="clip-source" target="_blank" rel="noopener" hidden>Open original post on X</a>
     </dialog>
   </div>
 </section>
