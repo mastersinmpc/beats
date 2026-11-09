@@ -322,6 +322,8 @@ HEAD = """<!doctype html>
 <title>{title}</title>
 <meta name="description" content="{desc}">
 <link rel="canonical" href="{url}">
+<link rel="icon" href="{root}assets/favicon.ico" sizes="any">
+<meta property="og:site_name" content="Beats: Narratives &amp; Models">
 <meta property="og:title" content="{title}">
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{url}">
@@ -329,6 +331,8 @@ HEAD = """<!doctype html>
 {ogimg}
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@siddharth_ram">
+<meta name="twitter:title" content="{title}">
+<meta name="twitter:description" content="{desc}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
@@ -373,7 +377,12 @@ def guide_html(root):
     return GUIDE.format(root=root, idx=IDX)
 
 def head(title, desc, url, root, ogimg="", ogtype="website", with_guide=True):
-    og = f'<meta property="og:image" content="{esc(ogimg)}">' if ogimg else ""
+    share_image = SITE["url"] + "/assets/beats-share.jpg"
+    image = esc(ogimg or share_image)
+    og = f'<meta property="og:image" content="{image}">\n<meta name="twitter:image" content="{image}">'
+    if not ogimg:
+        og += '\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">'
+        og += '\n<meta property="og:image:alt" content="Beats: Narratives &amp; Models by Itihasa">'
     return HEAD.format(title=esc(title), desc=esc(desc), url=esc(url), root=root, ogimg=og, ogtype=ogtype, idx=IDX, guide=(guide_html(root) if with_guide else ""))
 
 def foot():
@@ -618,8 +627,8 @@ def build_index(arts):
 
 </main>
 """
-    desc = "Siddharth Ram is a Storyteller-in-Residence for frontier labs and AI startups. Essays, films and research on making the world believe in work that does not exist yet."
-    return head("Beats: Narratives & Models. Siddharth Ram", desc, SITE["url"] + "/", "", arts[0]["cover"], with_guide=False) + body + foot()
+    desc = "Essays, films and research by Siddharth Ram on storytelling, AI and how new ideas earn belief."
+    return head("Beats: Narratives & Models", desc, SITE["url"] + "/", "", with_guide=False) + body + foot()
 
 def build_essay(a, arts):
     i = arts.index(a)
