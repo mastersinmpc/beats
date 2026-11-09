@@ -114,10 +114,12 @@ img{max-width:100%;height:auto;display:block}
 }
 .hero p.lead{font-size:clamp(1.2rem,1.8vw,1.5rem);line-height:1.45;color:var(--ink-2);max-width:40rem;margin:0 0 1.8rem}
 .hero .clip{display:flex;gap:.9rem;align-items:center;text-decoration:none;max-width:26rem}
-.hero summary.clip{cursor:pointer;list-style:none}
-.hero summary.clip::-webkit-details-marker{display:none}
-.hero summary.clip:focus-visible{outline:2px solid var(--gold-ink);outline-offset:4px}
-.hero .clip-player{display:block;width:min(100%,18rem);aspect-ratio:9/16;border:0;border-radius:3px;margin-top:1rem;background:var(--paper-2)}
+.hero button.clip{cursor:pointer;background:none;border:0;padding:0;color:inherit;font:inherit;text-align:left}
+.hero .clip-dialog{max-width:calc(100vw - 2rem);padding:.75rem;border:1px solid var(--rule);border-radius:5px;background:var(--paper);color:var(--ink)}
+.hero .clip-dialog::backdrop{background:rgba(16,12,18,.78)}
+.hero .clip-dialog form{display:flex;justify-content:flex-end;margin:0 0 .5rem}
+.hero .clip-dialog button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+.hero .clip-player{display:block;width:min(20rem,calc(100vw - 4rem),calc((100dvh - 6rem) * .5625));aspect-ratio:9/16;border:0;border-radius:3px;background:var(--paper-2)}
 .hero .clip .ph{flex:0 0 4.4rem;width:4.4rem;aspect-ratio:9/16;border-radius:3px;background:var(--paper-2);overflow:hidden;display:block}
 .hero .clip img{width:100%;height:100%;object-fit:cover;display:block}
 .hero .clip .tx{display:block;min-width:0}
@@ -263,6 +265,17 @@ footer a{text-decoration:none;color:var(--ink-2)}
 SCRIPT = r"""<script>
 (function(){
   var root=document.documentElement, btn=document.getElementById('theme');
+  var clipOpen=document.getElementById('clip-open'), clipDialog=document.getElementById('clip-dialog');
+  if(clipOpen && clipDialog){
+    var clipPlayer=clipDialog.querySelector('iframe');
+    clipOpen.addEventListener('click',function(){
+      clipDialog.showModal();
+      clipPlayer.src=clipPlayer.dataset.src;
+    });
+    clipDialog.addEventListener('close',function(){
+      clipPlayer.removeAttribute('src');
+    });
+  }
   var saved=null; try{saved=localStorage.getItem('theme')}catch(e){}
   function apply(t){ if(t==='dark'){root.setAttribute('data-theme','dark'); if(btn) btn.textContent='light';} else {root.removeAttribute('data-theme'); if(btn) btn.textContent='dark';} }
   if(saved) apply(saved); else if(btn) btn.textContent=root.getAttribute('data-theme')==='dark'?'light':'dark';
@@ -399,13 +412,14 @@ def build_index(arts):
   <div class="hero-mid">
     <h1>Beats: Narratives <i>&amp;</i> Models</h1>
     <p class="lead">Storytelling in Residence to Frontier Research &amp; Startups</p>
-    <details>
-      <summary class="clip">
-      <span class="ph"><img src="assets/horowitz.jpg" alt="Ben Horowitz" loading="lazy"></span>
+    <button class="clip" id="clip-open" type="button" aria-haspopup="dialog" aria-controls="clip-dialog">
+      <span class="ph"><img src="assets/horowitz.jpg" alt="" loading="lazy"></span>
       <span class="tx"><span class="marg quiet">Watch, one minute</span><span class="t">What's the story of your company?</span><span class="by">Ben Horowitz</span></span>
-      </summary>
-      <iframe class="clip-player" src="https://www.youtube-nocookie.com/embed/Mjz8Z2I0w_g?playsinline=1" title="What's the story of your company? — Ben Horowitz" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="encrypted-media; picture-in-picture" allowfullscreen></iframe>
-    </details>
+    </button>
+    <dialog class="clip-dialog" id="clip-dialog" aria-label="What's the story of your company?">
+      <form method="dialog"><button type="submit" autofocus>Close</button></form>
+      <iframe class="clip-player" data-src="https://www.youtube-nocookie.com/embed/Mjz8Z2I0w_g?playsinline=1&amp;autoplay=1" title="What's the story of your company? — Ben Horowitz" referrerpolicy="strict-origin-when-cross-origin" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+    </dialog>
   </div>
 </section>
 {guide_html("")}
