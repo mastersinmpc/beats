@@ -113,6 +113,12 @@ img{max-width:100%;height:auto;display:block}
   white-space:nowrap;
 }
 .hero p.lead{font-size:clamp(1.2rem,1.8vw,1.5rem);line-height:1.45;color:var(--ink-2);max-width:40rem;margin:0 0 1.8rem}
+.worked-with{border-top:1px solid var(--rule);padding:1rem 0 1.25rem;display:flex;align-items:center;gap:.9rem 1.75rem;flex-wrap:wrap}
+.worked-with h2{font:500 .69rem var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);margin:0;white-space:nowrap}
+.worked-with ul{list-style:none;display:flex;align-items:center;flex-wrap:wrap;gap:.9rem clamp(1rem,3vw,2.5rem);padding:0;margin:0}
+.worked-with img{height:1.25rem;width:auto;max-width:7.5rem;object-fit:contain;filter:brightness(0);opacity:.78}
+html[data-theme="dark"] .worked-with img{filter:brightness(0) invert(1)}
+@media(max-width:40rem){.worked-with{display:block}.worked-with h2{margin-bottom:.85rem}.worked-with img{height:1.05rem;max-width:6.25rem}}
 .hero .clip{display:flex;gap:.9rem;align-items:center;text-decoration:none;max-width:26rem}
 .hero button.clip{cursor:pointer;background:none;border:0;padding:0;color:inherit;font:inherit;text-align:left}
 .hero .clip-dialog{max-width:calc(100vw - 2rem);padding:.75rem;border:1px solid var(--rule);border-radius:5px;background:var(--paper);color:var(--ink)}
@@ -461,6 +467,16 @@ def build_index(arts):
       <a class="clip-source" target="_blank" rel="noopener" hidden>Open original post on X</a>
     </dialog>
   </div>
+</section>
+<section class="worked-with" aria-labelledby="worked-with-title">
+  <h2 id="worked-with-title">Worked With</h2>
+  <ul>
+    <li><img src="assets/worked-pramaana.svg" alt="Pramaana Labs"></li>
+    <li><img src="assets/worked-accel.svg" alt="Accel"></li>
+    <li><img src="assets/worked-boldcap.png" alt="BoldCap"></li>
+    <li><img src="assets/worked-polygon.svg" alt="Polygon"></li>
+    <li><img src="assets/worked-hyphenate.svg" alt="Hyphenate"></li>
+  </ul>
 </section>
 {guide_html("")}
 <section class="block" id="essays">
