@@ -182,6 +182,7 @@ section.block>.grid{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem 
 .feature{display:grid;grid-template-columns:minmax(0,1fr);gap:1rem 1.6rem;margin:0 0 .5rem}
 @media(min-width:44rem){.feature{grid-template-columns:7fr 5fr}}
 .feature .th{aspect-ratio:16/9;object-fit:cover;width:100%;border-radius:3px;background:var(--paper-2);color:transparent}
+.feature .th.poster{aspect-ratio:auto;height:auto}
 .feature h4{margin:0 0 .2rem;font-size:1.35rem;font-weight:500;line-height:1.25}
 .feature .sub{margin:0 0 .6rem;font-style:italic;color:var(--ink-2)}
 .feature p{margin:0 0 .6rem;color:var(--ink-2)}
@@ -420,9 +421,9 @@ def build_index(arts):
     <div class="work">
       <h3 class="kind">Micro documentary</h3>
       <div class="feature">
-        <a href="https://www.youtube.com/watch?v={md['yt']}"><img class="th" src="https://img.youtube.com/vi/{md['yt']}/hqdefault.jpg" alt="{esc(md['title'])}" loading="lazy"></a>
+        <a href="{esc(md['url'])}"><img class="th poster" src="assets/pramaana-poster.jpg" alt="{esc(md['title'])} poster" width="1785" height="2526" loading="lazy"></a>
         <div>
-          <h4><a href="https://www.youtube.com/watch?v={md['yt']}" style="text-decoration:none">{esc(md['title'])}</a></h4>
+          <h4><a href="{esc(md['url'])}" style="text-decoration:none">{esc(md['title'])}</a></h4>
           <p class="sub">{esc(md['sub'])}. {esc(md['length'])}, {md['year']}.</p>
           <p>{esc(md['desc'])}</p>
           <div class="credits">{credits}</div>
