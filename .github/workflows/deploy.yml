@@ -1,0 +1,36 @@
+name: Deploy Beats to Netlify
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: netlify-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build static site
+        run: python3 build.py
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Deploy production
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        run: |
+          test -n "$NETLIFY_AUTH_TOKEN" || { echo "Set NETLIFY_AUTH_TOKEN in repository Actions secrets"; exit 1; }
+          test -n "$NETLIFY_SITE_ID" || { echo "Set NETLIFY_SITE_ID in repository Actions secrets"; exit 1; }
+          npx --yes netlify-cli@23.9.5 deploy --prod --dir=site --no-build
