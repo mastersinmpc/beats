@@ -170,6 +170,7 @@ section.block>.grid{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem 
 .beats p{display:grid;grid-template-columns:2.2rem 1fr;gap:0 .6rem;margin:0 0 1.3rem;font-size:1.2rem;line-height:1.5}
 .beats p .marg{padding-top:.45rem}
 .beats strong{font-weight:500}
+.residence-reading{display:block;width:fit-content;margin-top:.55rem;font-family:var(--mono);font-size:.78rem;line-height:1.5;color:var(--ink-2)}
 
 /* ---------- essay index ---------- */
 .newsletter-note{font-size:.78rem;line-height:1.5;color:var(--ink-3);max-width:27ch;margin:.65rem 0 0}
@@ -477,7 +478,7 @@ def build_index(arts):
   </div>
 </section>
 <section class="worked-with" aria-labelledby="worked-with-title">
-  <h2 id="worked-with-title">Worked With</h2>
+  <h2 id="worked-with-title">Previously Worked With</h2>
   <ul>
     <li><img class="worked-pramaana" src="assets/worked-pramaana.svg" alt="Pramaana Labs"></li>
     <li><img src="assets/worked-accel.svg" alt="Accel"></li>
@@ -503,7 +504,7 @@ def build_index(arts):
 <section class="block" id="work">
   <div class="grid">
     <div class="side"><span class="marg">§2 Work</span>
-    <h2>This is the work.</h2></div>
+    <h2>This is the work I have done across the Frontier &amp; Beyond</h2></div>
     <div class="work">
       <h3 class="kind">Micro documentary</h3>
       <div class="feature">
@@ -553,7 +554,7 @@ def build_index(arts):
       <p><span class="marg">01</span><span><strong>Writing Room.</strong> Your team and I form a writing room to engineer the firm's narratives and push them out, directly or through PR. I own it and I drive it.</span></p>
       <p><span class="marg">02</span><span><strong>Programs.</strong> I structure programs that build a community of practice around your firm, so the people who should believe in the work have a place to gather around it.</span></p>
       <p><span class="marg">03</span><span><strong>New Media.</strong> If you want to go beyond narratives and build a media house of your own, I put it together: newsletters, podcasts, documentaries, shows and events.</span></p>
-      <p><span class="marg">&nbsp;</span><span>I take a few residencies a year, usually by introduction. <a href="#about">Write to me</a>.</span></p>
+      <p><span class="marg">&nbsp;</span><span>I take a few residencies a year, usually by introduction. <a class="residence-reading" href="essays/what-is-a-storytelling-intelligence-lab/{IDX}">Read more about What Is a Storytelling Intelligence Lab &rarr;</a></span></p>
     </div>
   </div>
 </section>
