@@ -23,7 +23,8 @@ SITE = {
 
 def load_articles():
     arts = []
-    for j in sorted(ART.glob("*.json")):
+    # For essays on the same date, show the higher-numbered source first.
+    for j in sorted(ART.glob("*.json"), reverse=True):
         if j.name in ("reading.json", "work.json"):
             continue
         d = json.loads(j.read_text())
@@ -113,12 +114,12 @@ img{max-width:100%;height:auto;display:block}
   white-space:nowrap;
 }
 .hero p.lead{font-size:clamp(1.2rem,1.8vw,1.5rem);line-height:1.45;color:var(--ink-2);max-width:40rem;margin:0 0 1.8rem}
-.worked-with{border-top:1px solid var(--rule);padding:1rem 0 1.25rem;display:flex;align-items:center;gap:.9rem 1.75rem;flex-wrap:wrap}
-.worked-with h2{font:500 .69rem var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);margin:0;white-space:nowrap}
-.worked-with ul{list-style:none;display:flex;align-items:center;flex-wrap:wrap;gap:.9rem clamp(1rem,3vw,2.5rem);padding:0;margin:0}
-.worked-with img{height:1.25rem;width:auto;max-width:7.5rem;object-fit:contain;filter:brightness(0);opacity:.78}
+.worked-with{border-top:1px solid var(--rule);padding:.85rem 0 .9rem;margin-bottom:.55rem;display:flex;align-items:center;gap:.65rem 1.5rem;flex-wrap:wrap}
+.worked-with h2{font:500 .65rem var(--mono);letter-spacing:.11em;text-transform:uppercase;color:var(--ink-3);margin:0;white-space:nowrap}
+.worked-with ul{list-style:none;display:flex;align-items:center;flex-wrap:wrap;gap:.75rem clamp(1.15rem,3vw,2.4rem);padding:0;margin:0}
+.worked-with img{height:.93rem;width:auto;max-width:6rem;object-fit:contain;filter:brightness(0);opacity:.44}
 html[data-theme="dark"] .worked-with img{filter:brightness(0) invert(1)}
-@media(max-width:40rem){.worked-with{display:block}.worked-with h2{margin-bottom:.85rem}.worked-with img{height:1.05rem;max-width:6.25rem}}
+@media(max-width:40rem){.worked-with{display:block}.worked-with h2{margin-bottom:.65rem}.worked-with img{height:.82rem;max-width:5.25rem}}
 .hero .clip{display:flex;gap:.9rem;align-items:center;text-decoration:none;max-width:26rem}
 .hero button.clip{cursor:pointer;background:none;border:0;padding:0;color:inherit;font:inherit;text-align:left}
 .hero .clip-dialog{max-width:calc(100vw - 2rem);padding:.75rem;border:1px solid var(--rule);border-radius:5px;background:var(--paper);color:var(--ink)}
@@ -162,6 +163,7 @@ section.block>.grid{display:grid;grid-template-columns:minmax(0,1fr);gap:1.5rem 
 .beats strong{font-weight:500}
 
 /* ---------- essay index ---------- */
+.newsletter-note{font-size:.78rem;line-height:1.5;color:var(--ink-3);max-width:27ch;margin:.65rem 0 0}
 .essays{list-style:none;margin:0;padding:0;max-width:none}
 .essays li{border-top:1px solid var(--rule);padding:1.6rem 0;display:grid;grid-template-columns:minmax(0,1fr);gap:.4rem 1.6rem}
 @media(min-width:44rem){.essays li{grid-template-columns:1fr 9.5rem}}
@@ -482,9 +484,9 @@ def build_index(arts):
 <section class="block" id="essays">
   <div class="grid">
     <div class="side"><span class="marg">§1 Essays</span>
-    <h2>The Beat Room is where I write it down, one essay at a time.</h2></div>
+    <h2>The Beat Room is where I write it down, one essay at a time.</h2>
+    <p class="newsletter-note">The Beat Room is my newsletter on storytelling, AI and venture. Newest first. It also goes out on <a href="{SITE['newsletter']}">LinkedIn</a>.</p></div>
     <div>
-      <p style="margin:0 0 1.4rem;max-width:var(--measure);color:var(--ink-2)">The Beat Room is my newsletter on storytelling, AI and venture. Newest first. It also goes out on <a href="{SITE['newsletter']}">LinkedIn</a>.</p>
       <ul class="essays">{essays}
       </ul>
     </div>
