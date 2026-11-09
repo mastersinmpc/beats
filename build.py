@@ -101,8 +101,17 @@ img{max-width:100%;height:auto;display:block}
 .hero-index .d{font-family:var(--sans);font-size:.85rem;color:var(--ink-3);line-height:1.4}
 @media(max-width:44rem){.hero-index a{grid-template-columns:1.6rem 1fr}.hero-index .d{grid-column:2}}
 
-.hero h1{font-size:clamp(2.6rem,7.5vw,6.6rem);line-height:.98;letter-spacing:-.035em;font-weight:400;margin:0 0 1.6rem;max-width:14ch;text-wrap:balance}
-.hero h1 i{font-style:italic;font-weight:300}
+/* Size the masthead to its column so the title stays on one line. */
+.hero-mid{container-type:inline-size}
+.hero h1{
+  font-size:min(6.4vw,5.75rem);
+  font-size:min(7.65cqi,5.75rem);
+  line-height:1.06;
+  letter-spacing:-.045em;
+  font-weight:400;
+  margin:0 0 1.6rem;
+  white-space:nowrap;
+}
 .hero p.lead{font-size:clamp(1.2rem,1.8vw,1.5rem);line-height:1.45;color:var(--ink-2);max-width:40rem;margin:0 0 1.8rem}
 .hero .clip{display:flex;gap:.9rem;align-items:center;text-decoration:none;max-width:26rem}
 .hero .clip .ph{flex:0 0 4.4rem;width:4.4rem;aspect-ratio:9/16;border-radius:3px;background:var(--paper-2);overflow:hidden;display:block}
