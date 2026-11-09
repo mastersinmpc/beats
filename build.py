@@ -80,8 +80,9 @@ img{max-width:100%;height:auto;display:block}
 .guide .steps a:hover{color:var(--ink)}
 .guide .steps a.on{color:var(--pencil)}
 .guide .steps a.on::before{content:"";position:absolute;left:.55rem;right:.55rem;bottom:-.05rem;height:1px;background:var(--pencil)}
-.guide .toggle{flex:none;margin-left:auto;font-family:var(--mono);font-size:.74rem;color:var(--ink-3);background:none;border:1px solid var(--rule);border-radius:999px;padding:.3rem .7rem;cursor:pointer;white-space:nowrap}
-.guide .toggle:hover{color:var(--ink);border-color:var(--ink-3)}
+.theme-toggle{flex:none;align-self:center;margin-left:auto;font-family:var(--mono);font-size:.74rem;color:var(--ink-3);background:none;border:1px solid var(--rule);border-radius:999px;padding:.3rem .7rem;cursor:pointer;white-space:nowrap}
+.theme-row{display:flex;justify-content:flex-end;padding:.75rem 0}
+.theme-toggle:hover{color:var(--ink);border-color:var(--ink-3)}
 .guide .bar{height:1px;background:var(--pencil);width:0;transition:width .15s linear;margin:0 calc(-1*var(--gutter))}
 .guide .here{font-family:var(--mono);font-size:.74rem;color:var(--ink-3);display:none}
 .guide .here{display:none}
@@ -96,7 +97,7 @@ img{max-width:100%;height:auto;display:block}
 /* ---------- hero: one full fold, composed like a plate ---------- */
 .hero{display:flex;flex-direction:column;padding:1.6rem 0 0}
 .hero-mid{padding:clamp(2.5rem,7vh,5rem) 0 clamp(2rem,5vh,3.5rem)}
-.hero-top{display:flex;justify-content:space-between;gap:1rem;padding-bottom:1.1rem;border-bottom:1px solid var(--rule)}
+.hero-top{display:flex;align-items:center;gap:1rem;justify-content:space-between;gap:1rem;padding-bottom:1.1rem;border-bottom:1px solid var(--rule)}
 .hero h1 i{font-style:italic;font-weight:300;color:var(--gold-ink)}
 .hero-index{border-top:1px solid var(--rule);padding-top:.4rem;display:grid;grid-template-columns:1fr}
 @media(min-width:60rem){.hero-index{grid-template-columns:1fr;max-width:46rem}}
@@ -377,6 +378,8 @@ FOOT = """
 
 def esc(s): return html.escape(s, quote=True)
 
+THEME_BUTTON = '<button class="theme-toggle" id="theme" type="button" aria-label="Switch between light and dark">dark</button>'
+
 GUIDE = """<header class="guide" id="guide">
   <div class="row">
     <nav class="steps" aria-label="Sections">
@@ -389,7 +392,6 @@ GUIDE = """<header class="guide" id="guide">
       <a href="{root}{idx}#about" data-s="about">7 About</a>
     </nav>
     <span class="here" id="here"></span>
-    <button class="toggle" id="theme" type="button" aria-label="Switch between light and dark">dark</button>
   </div>
   <span class="swipe-hint">Swipe tabs &harr;</span>
   <div class="bar" id="bar"></div>
@@ -406,7 +408,7 @@ def head(title, desc, url, root, ogimg="", ogtype="website", with_guide=True):
     if not ogimg:
         og += '\n<meta property="og:image:width" content="1200">\n<meta property="og:image:height" content="630">'
         og += '\n<meta property="og:image:alt" content="Beats: Narratives &amp; Models by Itihasa">'
-    return HEAD.format(title=esc(title), desc=esc(desc), url=esc(url), root=root, ogimg=og, ogtype=ogtype, idx=IDX, guide=(guide_html(root) if with_guide else ""))
+    return HEAD.format(title=esc(title), desc=esc(desc), url=esc(url), root=root, ogimg=og, ogtype=ogtype, idx=IDX, guide=(f'<div class="theme-row">{THEME_BUTTON}</div>' + guide_html(root) if with_guide else ""))
 
 def foot():
     return FOOT.format(script=SCRIPT, **SITE)
@@ -469,6 +471,7 @@ def build_index(arts):
 <section class="hero">
   <div class="hero-top">
     <span class="marg quiet">Beats by Itihasa &middot; a storytelling research lab</span>
+    {THEME_BUTTON}
   </div>
   <div class="hero-mid">
     <h1>Beats: Narratives <i>&amp;</i> Models</h1>
