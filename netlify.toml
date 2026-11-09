@@ -1,0 +1,6 @@
+[build]
+  command = "python3 build.py"
+  publish = "site"
+
+# Directory index pages provide clean URLs. Netlify serves /404.html for misses.
+# No catch-all rewrite: missing pages must retain an HTTP 404 status.
