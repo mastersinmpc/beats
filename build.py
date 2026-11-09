@@ -43,14 +43,16 @@ def load_articles():
     return arts
 
 CSS = r"""
+@font-face{font-family:Geist;src:url("assets/geist.woff2") format("woff2");font-style:normal;font-weight:100 900;font-display:swap}
+@font-face{font-family:"Geist Mono";src:url("assets/geist-mono.woff2") format("woff2");font-style:normal;font-weight:100 900;font-display:swap}
 :root{
   --paper:#FFFFFF; --paper-2:#F4F0F4; --ink:#2A1B2D; --ink-2:#4E3D52; --ink-3:#7F7083;
   --rule:#E5DDE5; --gold:#C9A14A; --gold-ink:#9A7424; --blue:#3A2A4A;
   --measure:38rem; --gutter:clamp(1.25rem,4vw,3.5rem);
   --serif:"Newsreader",Georgia,"Times New Roman",serif;
-  --mono:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --mono:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
   --pencil:#6E2E66;
-  --sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --sans:Geist,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
 }
 html[data-theme="dark"]{--paper:#17101B;--paper-2:#221929;--ink:#F0E8F0;--ink-2:#CBBFCC;--ink-3:#948796;--rule:#352A39;--gold:#D9B35E;--gold-ink:#E4C274;--blue:#B9A6D0;--pencil:#D4A1CF}
 html{color-scheme:light}
@@ -74,13 +76,13 @@ img{max-width:100%;height:auto;display:block}
 .guide .row{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:3.2rem}
 .guide .brand{font-family:var(--serif);font-size:1.15rem;font-weight:500;letter-spacing:-.01em;text-decoration:none;white-space:nowrap}
 .guide .brand em{font-style:italic;color:var(--gold-ink);font-weight:400;font-size:.9rem;margin-left:.35rem}
-.guide .steps{display:flex;gap:.2rem;overflow-x:auto;scrollbar-width:none;font-family:var(--mono);font-size:.74rem}
+.guide .steps{display:flex;gap:.2rem;overflow-x:auto;scrollbar-width:none;font-family:var(--sans);font-weight:500;font-size:.74rem}
 .guide .steps::-webkit-scrollbar{display:none}
 .guide .steps a{text-decoration:none;color:var(--ink-3);padding:.35rem .55rem;border-radius:2px;white-space:nowrap;position:relative}
 .guide .steps a:hover{color:var(--ink)}
 .guide .steps a.on{color:var(--pencil)}
 .guide .steps a.on::before{content:"";position:absolute;left:.55rem;right:.55rem;bottom:-.05rem;height:1px;background:var(--pencil)}
-.theme-toggle{flex:none;align-self:center;margin-left:auto;font-family:var(--mono);font-size:.74rem;color:var(--ink-3);background:none;border:1px solid var(--rule);border-radius:999px;padding:.3rem .7rem;cursor:pointer;white-space:nowrap}
+.theme-toggle{flex:none;align-self:center;margin-left:auto;font-family:var(--sans);font-weight:500;font-size:.74rem;color:var(--ink-3);background:none;border:1px solid var(--rule);border-radius:999px;padding:.3rem .7rem;cursor:pointer;white-space:nowrap}
 .theme-row{display:flex;justify-content:flex-end;padding:.75rem 0}
 .theme-toggle:hover{color:var(--ink);border-color:var(--ink-3)}
 .guide .bar{height:1px;background:var(--pencil);width:0;transition:width .15s linear;margin:0 calc(-1*var(--gutter))}
@@ -358,7 +360,7 @@ HEAD = """<!doctype html>
 <meta name="twitter:description" content="{desc}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{root}style.css">
 </head>
 <body>
@@ -595,11 +597,11 @@ def build_index(arts):
             <text x="320" y="176">A judge reads</text><text x="320" y="196">for taste</text>
             <text x="555" y="106">The two become</text><text x="555" y="126">one reward</text>
           </g>
-          <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="currentColor" color="var(--pencil)" text-anchor="end">
+          <g font-family="Geist Mono, monospace" font-size="10.5" fill="currentColor" color="var(--pencil)" text-anchor="end">
             <text x="246" y="40">beats, value shifts, commitments</text>
             <text x="246" y="206">surprise, specificity, voice</text>
           </g>
-          <g font-family="IBM Plex Mono, monospace" font-size="10.5" fill="currentColor" color="var(--ink-3)" text-anchor="middle">
+          <g font-family="Geist Mono, monospace" font-size="10.5" fill="currentColor" color="var(--ink-3)" text-anchor="middle">
             <text x="320" y="244">the reward trains the next draft</text>
           </g>
         </svg>
